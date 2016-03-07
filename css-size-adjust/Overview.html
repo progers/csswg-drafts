@@ -114,15 +114,16 @@ on screen, on paper, in speech, etc.
       <li><a href="#placement"><span class="secno">1.1</span> <span class="content">Module interactions</span></a>
       <li><a href="#values"><span class="secno">1.2</span> <span class="content">Values</span></a>
      </ol>
+    <li><a href="#allowing-adjustment"><span class="secno">2</span> <span class="content">Allowing text size adjustment features</span></a>
     <li>
-     <a href="#default-adjustment"><span class="secno">2</span> <span class="content">Default size adjustment</span></a>
+     <a href="#default-adjustment"><span class="secno">3</span> <span class="content">Default size adjustment</span></a>
      <ol class="toc">
-      <li><a href="#default-adjustment-types"><span class="secno">2.1</span> <span class="content">Types of boxes adjusted</span></a>
-      <li><a href="#default-adjustment-conditions"><span class="secno">2.2</span> <span class="content">Conditions that suppress adjustment</span></a>
-      <li><a href="#default-adjustment-calculation"><span class="secno">2.3</span> <span class="content">Calculation of default adjustment</span></a>
+      <li><a href="#default-adjustment-types"><span class="secno">3.1</span> <span class="content">Types of boxes adjusted</span></a>
+      <li><a href="#default-adjustment-conditions"><span class="secno">3.2</span> <span class="content">Conditions that suppress adjustment</span></a>
+      <li><a href="#default-adjustment-calculation"><span class="secno">3.3</span> <span class="content">Calculation of default adjustment</span></a>
      </ol>
-    <li><a href="#adjustment-control"><span class="secno">3</span> <span class="content">Size adjustment control: the <span class="property">text-size-adjust</span> property</span></a>
-    <li><a href="#acknowledgments"><span class="secno">4</span> <span class="content">Acknowledgments</span></a>
+    <li><a href="#adjustment-control"><span class="secno">4</span> <span class="content">Size adjustment control: the <span class="property">text-size-adjust</span> property</span></a>
+    <li><a href="#acknowledgments"><span class="secno">5</span> <span class="content">Acknowledgments</span></a>
     <li>
      <a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
      <ol class="toc">
@@ -169,7 +170,7 @@ on screen, on paper, in speech, etc.
   user needs to scroll side to side to read <em>each line of text</em>,
   which is a serious inconvenience to the user.</p>
    <p>One way for software that displays Web pages or other CSS-formatted
-  content on a mobile device is to make some of the text larger so that
+  content on a narrow device is to make some of the text larger so that
   this problem does not occur.  The goal of this enlargement is to make
   the text big enough so that when the block it is in is scaled to the
   width of the display, the text is large enough to read.  At the same
@@ -198,7 +199,25 @@ on screen, on paper, in speech, etc.
    <p>In addition to the property-specific values listed in their definitions,
   all properties defined in this specification also accept the <a href="https://www.w3.org/TR/CSS21/cascade.html#value-def-inherit">inherit</a> keyword as their property value. For readability it has not been repeated
   explicitly.</p>
-   <h2 class="heading settled" data-level="2" id="default-adjustment"><span class="secno">2. </span><span class="content">Default size adjustment</span><a class="self-link" href="#default-adjustment"></a></h2>
+   <h2 class="heading settled" data-level="2" id="allowing-adjustment"><span class="secno">2. </span><span class="content">Allowing text size adjustment features</span><a class="self-link" href="#allowing-adjustment"></a></h2>
+   <p>Text size adjustment can improve usability beyond what existing pan
+  and pinch-zoom functionality provides when viewing wide content on a
+  narrow display. Because text size adjustment affects content in ways
+  the content author may not intend, care should be taken to only use
+  adjustment in cases where it is needed.</p>
+   <p>The following conditions should be met for text size adjustment to be
+  allowed at all:</p>
+   <ul>
+    <li>The device has pan and pinch-zoom functionality such a
+    touchscreen display. Devices with zoom features that adjust the text
+    size (such as the zoom used in some desktop browsers) would not be
+    sufficient because this approach does not cause the user to need to
+    pan to read long lines of text.
+    <li>The <span class="css">actual viewport</span> is larger than the <span class="css">initial viewport</span> (see <a data-link-type="biblio" href="#biblio-css-device-adapt-1">[css-device-adapt-1]</a>).
+   </ul>
+   <p>If text size adjustment is not allowed, no text size adjustment should
+  be performed.</p>
+   <h2 class="heading settled" data-level="3" id="default-adjustment"><span class="secno">3. </span><span class="content">Default size adjustment</span><a class="self-link" href="#default-adjustment"></a></h2>
    <p>This section defines the default size adjustment rules.  These rules
 are then referenced by the definition of the <a class="property" data-link-type="propdesc" href="#propdef-text-size-adjust" id="ref-for-propdef-text-size-adjust-1">text-size-adjust</a> property
 in the following section.</p>
@@ -208,11 +227,11 @@ present is correct, etc.</p>
    <p class="issue" id="issue-7ada1e3c"><a class="self-link" href="#issue-7ada1e3c"></a> It’s not clear how much this section should define
 precise behavior versus how much it should allow future room for
 innovation and improvement.</p>
-   <h3 class="heading settled" data-level="2.1" id="default-adjustment-types"><span class="secno">2.1. </span><span class="content">Types of boxes adjusted</span><a class="self-link" href="#default-adjustment-types"></a></h3>
+   <h3 class="heading settled" data-level="3.1" id="default-adjustment-types"><span class="secno">3.1. </span><span class="content">Types of boxes adjusted</span><a class="self-link" href="#default-adjustment-types"></a></h3>
    <p>The default size adjustment affects text and form controls, whether
 those form controls contain text (e.g., text inputs, selects) or do not
 (e.g., radio buttons, checkboxes).</p>
-   <h3 class="heading settled" data-level="2.2" id="default-adjustment-conditions"><span class="secno">2.2. </span><span class="content">Conditions that suppress adjustment</span><a class="self-link" href="#default-adjustment-conditions"></a></h3>
+   <h3 class="heading settled" data-level="3.2" id="default-adjustment-conditions"><span class="secno">3.2. </span><span class="content">Conditions that suppress adjustment</span><a class="self-link" href="#default-adjustment-conditions"></a></h3>
    <p>A number of conditions suppress the default adjustment because these
 conditions are associated with layouts for which the user experience
 would be worsened by size adjustment rather than improved by it.  These
@@ -227,7 +246,7 @@ conditions are:</p>
   with a <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css2/visudet.html#propdef-width">width</a> other than <span class="css">auto</span> (see <a data-link-type="biblio" href="#biblio-css21">[CSS21]</a>),
     <li>when the objects to be adjusted have <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-text-3/#propdef-white-space">white-space</a> of <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-text-3/#valdef-white-space-pre">pre</a> or <a class="css" data-link-type="maybe" href="https://drafts.csswg.org/css-text-3/#valdef-white-space-nowrap">nowrap</a> (see <a data-link-type="biblio" href="#biblio-css21">[CSS21]</a>) or a <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-text-4/#propdef-text-wrap">text-wrap</a> of <span class="css">nowrap</span> (see <a data-link-type="biblio" href="#biblio-css-text-4">[CSS-TEXT-4]</a>).
    </ul>
-   <h3 class="heading settled" data-level="2.3" id="default-adjustment-calculation"><span class="secno">2.3. </span><span class="content">Calculation of default adjustment</span><a class="self-link" href="#default-adjustment-calculation"></a></h3>
+   <h3 class="heading settled" data-level="3.3" id="default-adjustment-calculation"><span class="secno">3.3. </span><span class="content">Calculation of default adjustment</span><a class="self-link" href="#default-adjustment-calculation"></a></h3>
    <p>The adjustment performed should be based on preferences (of the
 renderer or the renderer’s user) indicating the desired <dfn data-dfn-type="dfn" data-noexport="" id="minimum-readable-text-size">minimum
 readable text size<a class="self-link" href="#minimum-readable-text-size"></a></dfn>.
@@ -240,12 +259,12 @@ determined by the minimum block text size and the computed value of <a class="pr
 second; however, in order to maintain differentiations between font
 sizes, it should often be slightly larger. <span class="issue" id="issue-499161e9"><a class="self-link" href="#issue-499161e9"></a>Define
 this with more detail/precision.</span></p>
-   <h2 class="heading settled" data-level="3" id="adjustment-control"><span class="secno">3. </span><span class="content">Size adjustment control: the <a class="property" data-link-type="propdesc" href="#propdef-text-size-adjust" id="ref-for-propdef-text-size-adjust-2">text-size-adjust</a> property</span><a class="self-link" href="#adjustment-control"></a></h2>
+   <h2 class="heading settled" data-level="4" id="adjustment-control"><span class="secno">4. </span><span class="content">Size adjustment control: the <a class="property" data-link-type="propdesc" href="#propdef-text-size-adjust" id="ref-for-propdef-text-size-adjust-2">text-size-adjust</a> property</span><a class="self-link" href="#adjustment-control"></a></h2>
    <table class="def propdef" data-link-for-hint="text-size-adjust">
     <tbody>
      <tr>
       <th>Name:
-      <td><dfn class="dfn-paneled css" data-dfn-type="property" data-export="" data-lt="text-size-adjust" id="propdef-text-size-adjust">text-size-adjust<span class="dfn-panel" data-deco=""><b><a href="#propdef-text-size-adjust">#propdef-text-size-adjust</a></b><b>Referenced in:</b><span><a href="#ref-for-propdef-text-size-adjust-1">2. Default size adjustment</a></span><span><a href="#ref-for-propdef-text-size-adjust-2">3. Size adjustment control: the text-size-adjust property</a></span></span></dfn>
+      <td><dfn class="dfn-paneled css" data-dfn-type="property" data-export="" data-lt="text-size-adjust" id="propdef-text-size-adjust">text-size-adjust<span class="dfn-panel" data-deco=""><b><a href="#propdef-text-size-adjust">#propdef-text-size-adjust</a></b><b>Referenced in:</b><span><a href="#ref-for-propdef-text-size-adjust-1">3. Default size adjustment</a></span><span><a href="#ref-for-propdef-text-size-adjust-2">4. Size adjustment control: the text-size-adjust property</a></span></span></dfn>
      <tr class="value">
       <th>Value:
       <td class="prod">auto <a data-link-type="grammar" href="https://drafts.csswg.org/css-values-3/#comb-one">|</a> none <a data-link-type="grammar" href="https://drafts.csswg.org/css-values-3/#comb-one">|</a> &lt;percentage>
@@ -276,18 +295,15 @@ this with more detail/precision.</span></p>
    </table>
    <dl>
     <dt><dfn class="css" data-dfn-for="text-size-adjust" data-dfn-type="value" data-export="" id="valdef-text-size-adjust-auto">auto<a class="self-link" href="#valdef-text-size-adjust-auto"></a></dfn>
-    <dd>Renderers must use the <a href="#default-adjustment">default size adjustment</a> when displaying on a small device.
+    <dd>Renderers must use the <a href="#default-adjustment">default size adjustment</a> if <a href="#allowing-adjustment">adjustment is allowed</a>.
     <dt><dfn class="css" data-dfn-for="text-size-adjust" data-dfn-type="value" data-export="" id="valdef-text-size-adjust-none">none<a class="self-link" href="#valdef-text-size-adjust-none"></a></dfn>
-    <dd>Renderers must not do size adjustment when displaying on a small device.
+    <dd>Renderers must not do size adjustment.
     <dt><dfn class="css" data-dfn-for="text-size-adjust" data-dfn-type="value" data-export="" id="valdef-text-size-adjust-percentage">&lt;percentage><a class="self-link" href="#valdef-text-size-adjust-percentage"></a></dfn>
     <dd>
-     When displaying on a small device, renderers must not do size adjustment but instead the computed value of <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-fonts-3/#propdef-font-size">font-size</a> must be multiplied by this percentage. 
+     If <a href="#allowing-adjustment">adjustment is allowed</a>, renderers must not use the <a href="#default-adjustment">default size adjustment</a> and the computed value of <a class="property" data-link-type="propdesc" href="https://drafts.csswg.org/css-fonts-3/#propdef-font-size">font-size</a> must be multiplied by this percentage. 
      <p class="note" role="note">Note: This means that 'text-size-adjust: 100%;' is equivalent to 'text-size-adjust: none;'.</p>
    </dl>
-   <p class="issue" id="issue-0028bf4a"><a class="self-link" href="#issue-0028bf4a"></a> "Small device" is not well defined. We should clearly specify
-  when text size adjustment should apply. For example, in practice a
-  large tablet is considered by vendors to be a small device.</p>
-   <h2 class="heading settled" data-level="4" id="acknowledgments"><span class="secno">4. </span><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
+   <h2 class="heading settled" data-level="5" id="acknowledgments"><span class="secno">5. </span><span class="content">Acknowledgments</span><a class="self-link" href="#acknowledgments"></a></h2>
    <p>The editors would like to thank:
   .</p>
   </main>
@@ -383,13 +399,13 @@ this with more detail/precision.</span></p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#valdef-text-size-adjust-auto">auto</a><span>, in §3</span>
-   <li><a href="#minimum-block-text-size">minimum block text size</a><span>, in §2.3</span>
+   <li><a href="#valdef-text-size-adjust-auto">auto</a><span>, in §4</span>
+   <li><a href="#minimum-block-text-size">minimum block text size</a><span>, in §3.3</span>
    <li><a href="#minimum-readable-text-size">minimum
-readable text size</a><span>, in §2.3</span>
-   <li><a href="#valdef-text-size-adjust-none">none</a><span>, in §3</span>
-   <li><a href="#valdef-text-size-adjust-percentage">&lt;percentage></a><span>, in §3</span>
-   <li><a href="#propdef-text-size-adjust">text-size-adjust</a><span>, in §3</span>
+readable text size</a><span>, in §3.3</span>
+   <li><a href="#valdef-text-size-adjust-none">none</a><span>, in §4</span>
+   <li><a href="#valdef-text-size-adjust-percentage">&lt;percentage></a><span>, in §4</span>
+   <li><a href="#propdef-text-size-adjust">text-size-adjust</a><span>, in §4</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -426,6 +442,8 @@ readable text size</a><span>, in §2.3</span>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
+   <dt id="biblio-css-device-adapt-1">[CSS-DEVICE-ADAPT-1]
+   <dd>Rune Lillesveen; Florian Rivoal; Matt Rakow. <a href="http://www.w3.org/TR/css-device-adapt-1/">CSS Device Adaptation Module Level 1</a>. 26 November 2015. WD. URL: <a href="http://www.w3.org/TR/css-device-adapt-1/">http://www.w3.org/TR/css-device-adapt-1/</a>
    <dt id="biblio-css-fonts-3">[CSS-FONTS-3]
    <dd>John Daggett. <a href="http://dev.w3.org/csswg/css-fonts/">CSS Fonts Module Level 3</a>. 3 October 2013. CR. URL: <a href="http://dev.w3.org/csswg/css-fonts/">http://dev.w3.org/csswg/css-fonts/</a>
    <dt id="biblio-css-text-3">[CSS-TEXT-3]
@@ -483,9 +501,6 @@ precise behavior versus how much it should allow future room for
 innovation and improvement.<a href="#issue-7ada1e3c"> ↵ </a></div>
    <div class="issue">Define
 this with more detail/precision.<a href="#issue-499161e9"> ↵ </a></div>
-   <div class="issue"> "Small device" is not well defined. We should clearly specify
-  when text size adjustment should apply. For example, in practice a
-  large tablet is considered by vendors to be a small device.<a href="#issue-0028bf4a"> ↵ </a></div>
   </div>
 <script>
         document.body.addEventListener("click", function(e) {

@@ -37,7 +37,7 @@ Introduction {#intro}
   which is a serious inconvenience to the user.
 
   One way for software that displays Web pages or other CSS-formatted
-  content on a mobile device is to make some of the text larger so that
+  content on a narrow device is to make some of the text larger so that
   this problem does not occur.  The goal of this enlargement is to make
   the text big enough so that when the block it is in is scaled to the
   width of the display, the text is large enough to read.  At the same
@@ -79,6 +79,30 @@ Values {#values}
   <a href="https://www.w3.org/TR/CSS21/cascade.html#value-def-inherit">inherit</a>
   keyword as their property value. For readability it has not been repeated
   explicitly.
+
+Allowing text size adjustment features {#allowing-adjustment}
+=============================================
+
+  Text size adjustment can improve usability beyond what existing pan
+  and pinch-zoom functionality provides when viewing wide content on a
+  narrow display. Because text size adjustment affects content in ways
+  the content author may not intend, care should be taken to only use
+  adjustment in cases where it is needed.
+
+  The following conditions should be met for text size adjustment to be
+  allowed at all:
+  <ul>
+    <li>The device has pan and pinch-zoom functionality such a
+    touchscreen display. Devices with zoom features that adjust the text
+    size (such as the zoom used in some desktop browsers) would not be
+    sufficient because this approach does not cause the user to need to
+    pan to read long lines of text.</li>
+    <li>The ''actual viewport'' is larger than the ''initial viewport''
+    (see [[!css-device-adapt-1]]).</li>
+  </ul>
+
+  If text size adjustment is not allowed, no text size adjustment should
+  be performed.
 
 Default size adjustment {#default-adjustment}
 =============================================
@@ -169,17 +193,13 @@ Size adjustment control: the 'text-size-adjust' property {#adjustment-control}
 
   <dl dfn-for="text-size-adjust" dfn-type="value">
     <dt><dfn>auto</dfn></dt>
-      <dd>Renderers must use the <a href="#default-adjustment">default size adjustment</a> when displaying on a small device.</dd>
+      <dd>Renderers must use the <a href="#default-adjustment">default size adjustment</a> if <a href="#allowing-adjustment">adjustment is allowed</a>.</dd>
     <dt><dfn>none</dfn></dt>
-      <dd>Renderers must not do size adjustment when displaying on a small device.</dd>
+      <dd>Renderers must not do size adjustment.</dd>
     <dt><dfn>&lt;percentage&gt;</dfn></dt>
-      <dd>When displaying on a small device, renderers must not do size adjustment but instead the computed value of 'font-size' must be multiplied by this percentage.
+      <dd>If <a href="#allowing-adjustment">adjustment is allowed</a>, renderers must not use the <a href="#default-adjustment">default size adjustment</a> and the computed value of 'font-size' must be multiplied by this percentage.
       <p class="note">Note: This means that 'text-size-adjust: 100%;' is equivalent to 'text-size-adjust: none;'.</p></dd>
   </dl>
-
-  Issue: "Small device" is not well defined. We should clearly specify
-  when text size adjustment should apply. For example, in practice a
-  large tablet is considered by vendors to be a small device.
 
 Acknowledgments {#acknowledgments}
 ==================================
